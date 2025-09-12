@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Module\Season\Exception;
+
+
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Throwable;
+
+class UniqueSeasonException extends HttpException
+{
+    public function __construct(string $message = "Conflict", Throwable $previous = null)
+    {
+        parent::__construct(Response::HTTP_CONFLICT, $message, $previous);
+    }
+}

@@ -1,0 +1,14 @@
+.git
+.gitignore
+.idea
+.env.local
+.env.local.php
+/.env.*.local
+/public/bundles/
+/vendor/
+/var/
+.phpunit.result.cache
+phpunit.xml
+node_modules/
+dist/
+build/

@@ -1,0 +1,13 @@
+framework:
+    mailer:
+        dsn: "smtp://%env(SMTP_MAILER_USER)%:%env(SMTP_MAILER_PASSWORD)%@%env(SMTP_MAILER_HOST)%:%env(SMTP_MAILER_PORT)%?encryption=%env(SMTP_MAILER_ENCRYPTION)%"
+
+when@dev:
+    framework:
+        mailer:
+            dsn: "null://null"
+
+when@test:
+    framework:
+        mailer:
+            dsn: "null://null"

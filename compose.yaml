@@ -1,0 +1,45 @@
+services:
+    database:
+        image: postgres:16
+        container_name: zavrsni-rad-postgres
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_DB: zavrsni-rad
+            POSTGRES_USER: dummy
+            POSTGRES_PASSWORD: dummy
+        volumes:
+            - zavrsni-rad-volume:/var/lib/postgresql/data
+        networks:
+            - zavrsni-rad-network
+        restart: unless-stopped
+    web:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: zavrsni-rad-api
+        ports:
+            - "8000:8000"
+        environment:
+            DATABASE_HOST: database
+            DATABASE_PORT: 5432
+            DATABASE_NAME: zavrsni-rad
+            DATABASE_USER: dummy
+            DATABASE_PASSWORD: dummy
+        env_file:
+            - .env.local
+        volumes:
+            - .:/var/www/html
+        networks:
+            - zavrsni-rad-network
+        restart: unless-stopped
+        depends_on:
+            - database
+volumes:
+    zavrsni-rad-volume:
+        name: zavrsni-rad-volume
+        driver: local
+networks:
+    zavrsni-rad-network:
+        name: zavrsni-rad-network
+        driver: bridge

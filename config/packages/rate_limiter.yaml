@@ -1,0 +1,14 @@
+framework:
+    rate_limiter:
+        authenticated_api:
+            policy: 'sliding_window'
+            limit: 100
+            interval: '1 minute'
+
+when@test:
+    framework:
+        rate_limiter:
+            authenticated_api:
+                policy: 'sliding_window'
+                limit: 10000
+                interval: '1 minute'
